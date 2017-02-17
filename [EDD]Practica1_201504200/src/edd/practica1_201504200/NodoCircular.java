@@ -13,9 +13,11 @@ public class NodoCircular {
     private String nombre;
     private NodoCircular siguiente;
     private NodoCircular anterior;
+    private ListaSimple letras;
     
-    public NodoCircular(String nombre) {
+    public NodoCircular(String nombre, ListaSimple letras) {
         this.nombre = nombre;
+        this.letras=letras;
         setSiguiente(this);
         setAnterior(this);
     }
@@ -60,6 +62,20 @@ public class NodoCircular {
      */
     public void setAnterior(NodoCircular anterior) {
         this.anterior = anterior;
+    }
+
+    /**
+     * @return the letras
+     */
+    public ListaSimple getLetras() {
+        return letras;
+    }
+
+    /**
+     * @param letras the letras to set
+     */
+    public void setLetras(ListaSimple letras) {
+        this.letras = letras;
     }
     
     

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package edd.practica1_201504200;
-
 /**
  *
  * @author Dénilson Argueta

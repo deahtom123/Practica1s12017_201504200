@@ -20,6 +20,10 @@ import org.jdom.input.SAXBuilder; // |
  */
 public class LectorXML {
 public static ListaSimple Diccionario= new ListaSimple();
+public static String dimensiones;
+public static ListaSimple doble=new ListaSimple();
+public static ListaSimple triple=new ListaSimple();
+
 public void cargarXml(String direccion)
 {
     //Se crea un SAXBuilder para poder parsear el archivo
@@ -32,8 +36,8 @@ public void cargarXml(String direccion)
         
          //OBTENGO LAS DIMENSIONES
         Element dimension = raiz.getChild("dimension");
-        String dim = dimension.getTextTrim();
-        System.out.println(dim);
+        dimensiones = dimension.getTextTrim();
+        System.out.println(dimensiones);
         
         //OBTENGO TODO DEL TAG <DOBLES>
             List dobles = raiz.getChildren("dobles");
@@ -45,8 +49,9 @@ public void cargarXml(String direccion)
                 Element coordenada = (Element)coordenadasDoble.get( j );
                 String x = coordenada.getChildTextTrim("x");
                 String y = coordenada.getChildTextTrim("y");
-                System.out.println(x+","+y);
+                doble.insertar(x, y);
             }
+            doble.imprimir2();
             
         //OBTENGO TODO DEL TAG TRIPLES
             List triples =  raiz.getChildren("triples");
@@ -58,9 +63,9 @@ public void cargarXml(String direccion)
                 Element coordenada = (Element)coordenadasTriple.get( j );
                 String x = coordenada.getChildTextTrim("x");
                 String y = coordenada.getChildTextTrim("y");
-                System.out.println(x+","+y);
+                triple.insertar(x, y);
             }
-            
+            triple.imprimir2();
 
         //OBTENGO TODO DEL TAG <DICCIONARIO>
             Element diccionario = raiz.getChild("diccionario");
@@ -73,7 +78,7 @@ public void cargarXml(String direccion)
             Diccionario.insertar(palabra);
             //AGREGO LAS PALABRAS A LA LISTA SIMPLE
         }
-            Diccionario.imprimir();
+            //Diccionario.imprimir();
     }catch ( IOException io ) {
         System.out.println( io.getMessage() );
     }catch ( JDOMException jdomex ) {

@@ -33,6 +33,23 @@ public class ListaSimple {
         }
     
     }
+    public void insertar(String x, String y)
+    {
+        NodoSimple nuevo=new NodoSimple(x,y);
+        if(cabeza==null)
+        {
+            setCabeza(nuevo);
+        }
+        else
+        {
+            NodoSimple auxiliar=this.getCabeza();
+            while(auxiliar.getSiguiente()!=null)
+            {
+                auxiliar=auxiliar.getSiguiente();
+            }
+            auxiliar.setSiguiente(nuevo);
+        }
+    }
     public void imprimir()
     {
         for(NodoSimple actual=this.getCabeza();actual!=null; actual=actual.getSiguiente())
@@ -40,6 +57,14 @@ public class ListaSimple {
                 System.out.println(actual.getPalabra());
         }
     }
+    public void imprimir2()
+    {
+        for(NodoSimple actual=this.getCabeza();actual!=null; actual=actual.getSiguiente())
+        {
+                System.out.println(actual.getX()+"," +actual.getY());
+        }
+    }
+    
 
     /**
      * @return the cabeza
