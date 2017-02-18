@@ -35,6 +35,26 @@ public class ListaCircular {
         }
         System.out.println(actual.getNombre());
     }
+    
+    public boolean buscar(String nombre) {
+        NodoCircular actual;
+        if (cabeza!=null)
+        {
+            for (actual = getCabeza().getSiguiente(); actual != cabeza; actual = actual.getSiguiente()) {
+                if (actual.getNombre().equalsIgnoreCase(nombre)) {
+                    return true;
+                }
+            }
+            if (cabeza.getNombre().equalsIgnoreCase(nombre)) {
+                return true;
+            }
+        }
+        else
+        {
+            return false; 
+        }
+       return false; 
+    }
 
     /**
      * @return the cabeza

@@ -15,7 +15,7 @@ public class Cola {
         int puntuacion;
         Nodo sig;
     }
-    private Nodo cabeza;
+    public Nodo cabeza;
     private Nodo fondo;
     public Cola()
     {

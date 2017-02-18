@@ -28,7 +28,7 @@ public void cargarXml(String direccion)
 {
     //Se crea un SAXBuilder para poder parsear el archivo
     SAXBuilder builder = new SAXBuilder();
-    File xmlFile = new File( "entrada.xml"); //aqui vas a poner direccion
+    File xmlFile = new File(direccion); //aqui vas a poner direccion
     try
     {
         Document document = (Document) builder.build( xmlFile );

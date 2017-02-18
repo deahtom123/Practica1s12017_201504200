@@ -27,6 +27,8 @@ public class EDDPractica1_201504200 {
         //Se crea un SAXBuilder para poder parsear el archivo
        LeerArchivo hola= new LeerArchivo();
        hola.setVisible(true);
+//       Juego hola=new Juego();
+//       hola.setVisible(true);
     }
     
 }

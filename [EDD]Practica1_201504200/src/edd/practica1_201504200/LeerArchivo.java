@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -43,7 +44,6 @@ public class LeerArchivo extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,20 +69,10 @@ public class LeerArchivo extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Prueba");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton4))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2)
@@ -100,9 +90,7 @@ public class LeerArchivo extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButton4)
-                .addGap(18, 18, 18)
+                .addGap(81, 81, 81)
                 .addComponent(jButton1)
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -133,77 +121,88 @@ public class LeerArchivo extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton2ActionPerformed
     public static ListaCircular jugadores=new ListaCircular();
-    public Cola letras=new Cola();
+    public static Cola letras=new Cola();
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String jugador=jTextField2.getText();
         ListaSimple fichas=new ListaSimple();
-        for(int i=0; i<7;i++)
+        if (jugadores.buscar(jugador)==false)
         {
-            fichas.insertar(letras.sacar());
+            for(int i=0; i<7;i++)
+            {
+                fichas.insertar(letras.sacar());
+            }
+            jugadores.insertar(jugador,fichas);
+            jTextField2.setText("");
         }
-        jugadores.insertar(jugador,fichas);
-        jTextField2.setText("");
-        
+        else
+        {
+            jTextField2.setText("");
+            
+        }
        
         
     }//GEN-LAST:event_jButton3ActionPerformed
     private void agregarletras()
     {
+        ArrayList a = new ArrayList();
         for(int i=0;i<12;i++)
          {
-            letras.add("A");
-            letras.add("E");
+            a.add("A");
+            a.add("E");
             
          }
          for(int i=0;i<9;i++)
          {
-             letras.add("O");
+             a.add("O");
          }
          for(int i=0; i<6;i++)
          {
-             letras.add("I");
-             letras.add("S");
+             a.add("I");
+             a.add("S");
          }
          for(int i=0;i<5;i++)
          {
-             letras.add("N");
-             letras.add("R");
-             letras.add("U");
-             letras.add("T");
-             letras.add("D");
+             a.add("N");
+             a.add("R");
+             a.add("U");
+             a.add("D");
          }
          for(int i=0;i<4;i++)
          {
-             letras.add("L");
-             letras.add("T");
-             letras.add("C");
+             a.add("L");
+             a.add("T");
+             a.add("C");
          }
          for(int i=0;i<2;i++)
          {
-             letras.add("G");
-             letras.add("B");
-             letras.add("M");
-             letras.add("P");
-             letras.add("H");
+             a.add("G");
+             a.add("B");
+             a.add("M");
+             a.add("P");
+             a.add("H");
          }
-         letras.add("F");
-         letras.add("V");
-         letras.add("Y");
-         letras.add("Q");
-         letras.add("J");
-         letras.add("Ñ");
-         letras.add("X");
-         letras.add("Z");
-         
-        letras.mostrar();
+         a.add("F");
+         a.add("V");
+         a.add("Y");
+         a.add("Q");
+         a.add("J");
+         a.add("Ñ");
+         a.add("X");
+         a.add("Z");
+         llenarcola(a);
     }
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
-        public void abrirArchivo() {
+    private void llenarcola(ArrayList a)
+    {
+        int numero, numeroAleatorio;
+        for(int i=0 ;i<a.size();i++)
+        {
+            numero=a.size();
+            numeroAleatorio = (int) (Math.random()*numero);
+            letras.add(String.valueOf(a.get(numeroAleatorio)));
+        }
+    }        public void abrirArchivo() {
         JFileChooser selector = new JFileChooser();
         //selector.setFileFilter(new Filtro("PRT"));
         selector.setDialogTitle("Leer Archivo");
@@ -255,7 +254,6 @@ public class LeerArchivo extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
