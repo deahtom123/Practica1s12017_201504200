@@ -5,17 +5,23 @@
  */
 package edd.practica1_201504200;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author Dénilson Argueta
  */
 public class NodoMatriz {
+    private int posX;
+    private int posY;
     private String palabra;
     private NodoMatriz derecha;
     private NodoMatriz izquierda;
     private NodoMatriz arriba;
     private NodoMatriz abajo;
-    public NodoMatriz(String palabra)
+    private JButton boton;
+    
+    public NodoMatriz()
     {
         this.palabra=palabra;
         derecha=null;
@@ -92,6 +98,48 @@ public class NodoMatriz {
      */
     public void setAbajo(NodoMatriz abajo) {
         this.abajo = abajo;
+    }
+
+    /**
+     * @return the posX
+     */
+    public int getPosX() {
+        return posX;
+    }
+
+    /**
+     * @param posX the posX to set
+     */
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    /**
+     * @return the posY
+     */
+    public int getPosY() {
+        return posY;
+    }
+
+    /**
+     * @param posY the posY to set
+     */
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    /**
+     * @return the boton
+     */
+    public JButton getBoton() {
+        return boton;
+    }
+
+    /**
+     * @param boton the boton to set
+     */
+    public void setBoton(JButton boton) {
+        this.boton = boton;
     }
     
     

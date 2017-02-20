@@ -70,6 +70,17 @@ public class Cola {
         }
         System.out.println();
     }
+    public int cantidad()
+    {
+        int cantidad=0;
+        Nodo reco=cabeza;
+        
+        while (reco!=null) {
+            reco=reco.sig;
+            cantidad++;
+        }
+        return cantidad;
+    }
     public boolean colavacia()
     {
         if(cabeza==null)
