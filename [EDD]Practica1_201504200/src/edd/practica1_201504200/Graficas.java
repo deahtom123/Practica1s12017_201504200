@@ -139,7 +139,7 @@ public class Graficas {
         bw.close();
         ejecutar("fichas","fichas");
     }
-    public void txt(int dimension) throws IOException
+    public void txt(MatrizOrtogonal matriz, int dimension) throws IOException
     {
         String ruta = "C:\\imagenes\\graficos\\tablero.txt";
         File archivo = new File(ruta);
@@ -147,18 +147,51 @@ public class Graficas {
 
         bw = new BufferedWriter(new FileWriter(archivo));
         bw.write("digraph G {");
-        int i=0;
-        
-        
-        
-       
-        for(int j=0; j<i-1;j++)
+        NodoMatriz auxiliar;
+        int i=1;
+        String palabra;
+        for(int posy=0; posy<dimension; posy++)
         {
-            bw.write("A"+j+"->A"+String.valueOf(j+1)+" ");
+            auxiliar = matriz.buscar(0,posy);
+            for(int posx=0; posx<dimension; posx++)
+            {
+                palabra=auxiliar.getPalabra();
+                if(palabra.equals(""))
+                {
+                    palabra="\"\"";
+                }
+                bw.write(i+"[label="+i+"] ");
+                auxiliar=auxiliar.getDerecha();
+                i++;
+            }
+        }
+        i=1;
+        for(int posy=0; posy<dimension; posy++)
+        {
+            for(int posx=0; posx<dimension; posx++)
+            {
+                if(posx!=dimension-1)
+                {
+                     bw.write(i+"->"+String.valueOf(i+1)+" ");
+                }
+                if(posx>0)
+                {
+                    bw.write(i+"->"+String.valueOf(i-1)+" ");
+                }
+                if(posy!=dimension-1)
+                {
+                     bw.write(i+"->"+String.valueOf(i+dimension)+" ");
+                }
+                if(posy>0)
+                {
+                    bw.write(i+"->"+String.valueOf(i-dimension)+" ");
+                }
+                i++;
+            }
         }
         bw.write("}");
         bw.close();
-        ejecutar("fichas","fichas");
+        ejecutar("tablero","tablero");
     }
     
 }

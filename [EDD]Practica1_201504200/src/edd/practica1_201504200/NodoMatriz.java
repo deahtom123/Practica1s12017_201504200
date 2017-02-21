@@ -23,7 +23,7 @@ public class NodoMatriz {
     
     public NodoMatriz()
     {
-        this.palabra=palabra;
+        palabra="";
         derecha=null;
         izquierda=null;
         arriba=null;

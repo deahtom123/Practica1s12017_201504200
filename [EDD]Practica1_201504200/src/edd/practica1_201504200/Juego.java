@@ -7,6 +7,7 @@ package edd.practica1_201504200;
 //import edd.practica1_201504200.LeerArchivo;
 import extras.LectorXML;
 import static java.awt.Image.SCALE_DEFAULT;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.logging.Level;
@@ -73,18 +74,19 @@ public class Juego extends javax.swing.JFrame {
         actualizar(lista);
         crear2();
     }
-    
+    MatrizOrtogonal m;
     public void crear2()
     {
         int tamano=600/dimension;
         int x=0, y=0;
-        MatrizOrtogonal m=new MatrizOrtogonal(dimension);
+        m=new MatrizOrtogonal(dimension);
         m.insertar();
         NodoMatriz auxiliar;
         ImageIcon fot = new ImageIcon("C:\\imagenes\\graficos\\2.png");
         Icon dobl = new ImageIcon(fot.getImage().getScaledInstance(tamano, tamano, SCALE_DEFAULT));
         ImageIcon fot2 = new ImageIcon("C:\\imagenes\\graficos\\3.png");
         Icon tripl = new ImageIcon(fot2.getImage().getScaledInstance(tamano, tamano, SCALE_DEFAULT));
+        ActionListener myButtonListener = new MyButtonListener();
           for (int posY=0 ; posY<dimension; posY++)
           {
                 auxiliar = m.buscar(0, posY);
@@ -104,6 +106,7 @@ public class Juego extends javax.swing.JFrame {
                         boton.setIcon(tripl);
                     }
                     auxiliar.setBoton(boton);
+                    auxiliar.getBoton().addActionListener(myButtonListener);
                     auxiliar=auxiliar.getDerecha();
                     x=x+tamano;
                 }
@@ -219,6 +222,7 @@ public class Juego extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -406,6 +410,11 @@ public class Juego extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setPreferredSize(new java.awt.Dimension(600, 600));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -429,6 +438,13 @@ public class Juego extends javax.swing.JFrame {
             }
         });
 
+        jButton15.setText("cambiar tblero");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -437,13 +453,15 @@ public class Juego extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(45, 45, 45)
                                 .addComponent(jButton3)
                                 .addGap(33, 33, 33)
-                                .addComponent(jButton4))
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton15))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -548,38 +566,37 @@ public class Juego extends javax.swing.JFrame {
                                 .addComponent(jButton2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton14)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton12))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton13)))
+                                    .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(31, 31, 31))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addGap(25, 25, 25))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton6)
+                                    .addComponent(jButton7)
+                                    .addComponent(jButton8)
+                                    .addComponent(jButton9)
+                                    .addComponent(jButton10)
+                                    .addComponent(jButton11)
+                                    .addComponent(jButton5))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel9))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jButton6)
-                                            .addComponent(jButton7)
-                                            .addComponent(jButton8)
-                                            .addComponent(jButton9)
-                                            .addComponent(jButton10)
-                                            .addComponent(jButton11)
-                                            .addComponent(jButton5))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel6)
                                             .addComponent(jButton3)
-                                            .addComponent(jButton4))))
-                                .addGap(25, 25, 25))))))
+                                            .addComponent(jButton4)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addComponent(jButton15))))))))
         );
 
         pack();
@@ -637,41 +654,69 @@ public class Juego extends javax.swing.JFrame {
              auxiliar.insertar(checkbox1.getLabel());
              contar--;
         }
+        else
+        {
+            letras.add(checkbox1.getLabel());
+        }
         if(checkbox2.getState()==false)
         {
              auxiliar.insertar(checkbox2.getLabel());
              contar--;
+        }
+        else
+        {
+            letras.add(checkbox2.getLabel());
         }
         if(checkbox3.getState()==false)
         {
              auxiliar.insertar(checkbox3.getLabel());
              contar--;
         }
+        else
+        {
+            letras.add(checkbox3.getLabel());
+        }
         if(checkbox4.getState()==false)
         {
              auxiliar.insertar(checkbox4.getLabel());
              contar--;
+        }
+        else
+        {
+            letras.add(checkbox4.getLabel());
         }
         if(checkbox5.getState()==false)
         {
              auxiliar.insertar(checkbox5.getLabel());
              contar--;
         }
+        else
+        {
+            letras.add(checkbox5.getLabel());
+        }
         if(checkbox6.getState()==false)
         {
              auxiliar.insertar(checkbox6.getLabel());
              contar--;
+        }
+        else
+        {
+            letras.add(checkbox6.getLabel());
         }
         if(checkbox7.getState()==false)
         {
              auxiliar.insertar(checkbox7.getLabel());
              contar--;
         }
-        //aqui
-        if(letras.cantidad()>=contar)
+        else
         {
-        
+            letras.add(checkbox7.getLabel());
         }
+//        //aqui
+//        if(letras.cantidad()>=contar)
+//        {
+//            
+//        }
         for(int i=0; i<contar; i++)
         {
             auxiliar.insertar(letras.sacar());
@@ -867,11 +912,34 @@ public class Juego extends javax.swing.JFrame {
             g.txt(jugadores);
             g.txt(letras);
             g.txt(diccionario);
+            //g.txt(m,dimension);
         } catch (IOException ex) {
             Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        // TODO add your handling code here:
+         int x= evt.getX(); 
+        int y = evt.getY();
+        jLabel8.setText(x+" "+y);
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        ImageIcon fot = new ImageIcon("C:\\imagenes\\graficos\\2.png");
+        Icon dobl = new ImageIcon(fot.getImage().getScaledInstance(600/dimension, 600/dimension, SCALE_DEFAULT));
+        NodoMatriz actual=m.buscar(0,0);
+        JButton nuevo=actual.getBoton();
+        nuevo.setIcon(dobl);
+//        jPanel3.add(nuevo);
+//        nuevo.setVisible(true);       
+//        nuevo.setBounds(0,0,600/dimension,600/dimension);
+        actual.setBoton(nuevo);
+        
+        
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -922,6 +990,7 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
