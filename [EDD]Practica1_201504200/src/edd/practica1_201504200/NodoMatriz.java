@@ -6,6 +6,7 @@
 package edd.practica1_201504200;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *

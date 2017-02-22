@@ -17,7 +17,7 @@ public class ListaCircular {
     }
     public void insertar(String nombre, ListaSimple letras)
     {
-        NodoCircular nuevo=new NodoCircular(nombre,letras);
+        NodoCircular nuevo=new NodoCircular(nombre,letras,0);
         if(cabeza!=null)
         {
             nuevo.setSiguiente(cabeza.getSiguiente());

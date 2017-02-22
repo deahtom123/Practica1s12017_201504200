@@ -5,6 +5,9 @@
  */
 package edd.practica1_201504200;
 
+import javax.swing.Icon;
+import javax.swing.JButton;
+
 /**
  *
  * @author Dénilson Argueta
@@ -36,6 +39,23 @@ public class ListaSimple {
     public void insertar(String x, String y)
     {
         NodoSimple nuevo=new NodoSimple(x,y);
+        if(cabeza==null)
+        {
+            setCabeza(nuevo);
+        }
+        else
+        {
+            NodoSimple auxiliar=this.getCabeza();
+            while(auxiliar.getSiguiente()!=null)
+            {
+                auxiliar=auxiliar.getSiguiente();
+            }
+            auxiliar.setSiguiente(nuevo);
+        }
+    }
+    public void insertar(String x, String y, JButton boton, String palabra)
+    {
+        NodoSimple nuevo=new NodoSimple(x,y,boton,palabra);
         if(cabeza==null)
         {
             setCabeza(nuevo);

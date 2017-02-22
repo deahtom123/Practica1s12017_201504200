@@ -21,13 +21,13 @@ public class MatrizOrtogonal {
         this.tamano=tamano;
     }
     public void insertar()
-    { //Le envias la dimension, lo que hace el mÃ©todo es solo crear las "casillas"
+    { 
         for (int Y=0 ; Y<tamano ; Y++)
-        { //Recorre las filas
+        { 
              for (int X=0 ; X<tamano ; X++)
              { //recorre columnas
-                 NodoMatriz nuevo = new NodoMatriz(); //crea el nodo
-                 nuevo.setPosX(X); //trabaje con posiciones
+                 NodoMatriz nuevo = new NodoMatriz(); 
+                 nuevo.setPosX(X); 
                  nuevo.setPosY(Y);
                  nuevo.setBoton(new JButton());
                  if(X==0 && Y==0)

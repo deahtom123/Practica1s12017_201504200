@@ -7,9 +7,11 @@ package edd.practica1_201504200;
 //import edd.practica1_201504200.LeerArchivo;
 import extras.LectorXML;
 import static java.awt.Image.SCALE_DEFAULT;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -29,10 +31,7 @@ public class Juego extends javax.swing.JFrame {
      */
     public Juego() {
         initComponents();
-        //jPanel3.setVisible(false);
-        //jugadores=b.jugadores;
-        //String nombre=jugadores.getCabeza().getNombre();
-        //jLabel2.setText(jugadores.getCabeza().getNombre());
+        cambiar=false;
     }
     public void actualizar(ListaSimple lista)
     {
@@ -69,7 +68,6 @@ public class Juego extends javax.swing.JFrame {
         jLabel2.setText(nombre);
         lista.imprimir();
         ListaSimple diccionario=new ListaSimple();
-        //diccionario=LectorXML.Diccionario;
         diccionario.imprimir();
         actualizar(lista);
         crear2();
@@ -94,60 +92,33 @@ public class Juego extends javax.swing.JFrame {
                 for (int posX=0 ; posX<dimension; posX++)
                 {
                     JButton boton=new JButton();
+                    String palabra="";
+                    //JLabel boton=new JLabel();
                     jPanel3.add(boton);
                     boton.setVisible(true);       
                     boton.setBounds(x,y,tamano,tamano);
+                    //boton.setText(letraselect);
                     if(verificardob(posX,posY)==true)
                     {
                         boton.setIcon(dobl);
+                        palabra="2";
+                        
                     }
                     if(verificartrip(posX,posY)==true)
                     {
                         boton.setIcon(tripl);
+                        palabra="3";
                     }
                     auxiliar.setBoton(boton);
-                    auxiliar.getBoton().addActionListener(myButtonListener);
+                    auxiliar.setPalabra(palabra);
+
                     auxiliar=auxiliar.getDerecha();
                     x=x+tamano;
                 }
                 y=y+tamano;
           }
     }
-    public void crear()
-    {
-        
-        int tamano=600/dimension;
-        int x=0, y=0;
-        holu= new JButton[dimension][dimension];
-        int contador=1;
-        ImageIcon fot = new ImageIcon("C:\\imagenes\\graficos\\2.png");
-        Icon dobl = new ImageIcon(fot.getImage().getScaledInstance(tamano, tamano, SCALE_DEFAULT));
-        ImageIcon fot2 = new ImageIcon("C:\\imagenes\\graficos\\3.png");
-        Icon tripl = new ImageIcon(fot2.getImage().getScaledInstance(tamano, tamano, SCALE_DEFAULT));
-        for (int i=0; i<dimension; i++)
-        {
-            x=0;
-            for (int j=0; j<dimension; j++)
-            {
-                holu[i][j]=new JButton();
-                if(verificardob(j,i)==true)
-                {
-                    holu[i][j].setIcon(dobl);
-                }
-                if(verificartrip(j,i)==true)
-                {
-                    holu[i][j].setIcon(tripl);
-                }
-                jPanel3.add(holu[i][j]);
-                holu[i][j].setVisible(true);       
-                holu[i][j].setBounds(x,y,tamano,tamano);
-                x=x+tamano;
-                contador=contador+1;
-            }
-            y=y+tamano;
-        }
-    }
-     
+
     public boolean verificardob(int x, int y)
     {
         for(NodoSimple actual=LectorXML.doble.getCabeza();actual!=null;actual=actual.getSiguiente())
@@ -189,16 +160,6 @@ public class Juego extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -209,37 +170,43 @@ public class Juego extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        checkbox1 = new java.awt.Checkbox();
-        checkbox2 = new java.awt.Checkbox();
-        checkbox3 = new java.awt.Checkbox();
-        checkbox4 = new java.awt.Checkbox();
-        checkbox5 = new java.awt.Checkbox();
-        checkbox6 = new java.awt.Checkbox();
-        checkbox7 = new java.awt.Checkbox();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        checkbox1 = new java.awt.Checkbox();
+        checkbox5 = new java.awt.Checkbox();
+        checkbox6 = new java.awt.Checkbox();
+        checkbox2 = new java.awt.Checkbox();
+        checkbox3 = new java.awt.Checkbox();
+        checkbox7 = new java.awt.Checkbox();
+        checkbox4 = new java.awt.Checkbox();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
-            }
-        });
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
             }
         });
         jTabbedPane1.addTab("Mano Jugador", jLabel7);
@@ -247,40 +214,6 @@ public class Juego extends javax.swing.JFrame {
         jTabbedPane1.addTab("Cola de fichas", jLabel11);
         jTabbedPane1.addTab("Matriz Tablero", jLabel12);
         jTabbedPane1.addTab("Lista Diccionario", jLabel13);
-
-        jLabel1.setText("Turno de");
-
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setText("Puntuacion");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jLabel4.setText("Nueva Palabra");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Cambiar Letras");
-
-        jButton2.setText("cambiar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jButton3.setText("Validar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -299,43 +232,20 @@ public class Juego extends javax.swing.JFrame {
         jLabel6.setText("Letras Activas");
 
         jButton5.setText("jButton5");
-        jButton5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jButton5MouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton5MouseMoved(evt);
-            }
-        });
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton5MousePressed(evt);
             }
         });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("jButton6");
-        jButton6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jButton6MouseDragged(evt);
-            }
-        });
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton6MousePressed(evt);
-            }
-        });
 
         jButton7.setText("jButton7");
-        jButton7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jButton7MouseDragged(evt);
-            }
-        });
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton7MousePressed(evt);
-            }
-        });
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -343,58 +253,14 @@ public class Juego extends javax.swing.JFrame {
         });
 
         jButton8.setText("jButton8");
-        jButton8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jButton8MouseDragged(evt);
-            }
-        });
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton8MousePressed(evt);
-            }
-        });
 
         jButton9.setText("jButton9");
-        jButton9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jButton9MouseDragged(evt);
-            }
-        });
-        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton9MousePressed(evt);
-            }
-        });
 
         jButton10.setText("jButton10");
-        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton10MousePressed(evt);
-            }
-        });
 
         jButton11.setText("jButton11");
-        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton11MousePressed(evt);
-            }
-        });
 
-        checkbox1.setLabel("a");
-
-        checkbox2.setLabel("a");
-
-        checkbox3.setLabel("a");
-
-        checkbox4.setLabel("a");
-
-        checkbox5.setLabel("a");
-
-        checkbox6.setLabel("a");
-
-        checkbox7.setLabel("a");
-
-        jButton12.setText("Prueba");
+        jButton12.setText("Crear");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -427,23 +293,258 @@ public class Juego extends javax.swing.JFrame {
             .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        jLabel8.setText("jLabel8");
-
-        jLabel9.setText("jLabel9");
-
-        jButton14.setText("jButton14");
+        jButton14.setText("Matriz");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
             }
         });
 
-        jButton15.setText("cambiar tblero");
+        jButton15.setText("Terminar");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
             }
         });
+
+        jLabel14.setText("        ");
+        jLabel14.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel14MouseDragged(evt);
+            }
+        });
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel14MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel14MouseReleased(evt);
+            }
+        });
+
+        jLabel15.setText("        ");
+        jLabel15.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel15MouseDragged(evt);
+            }
+        });
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel15MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel15MouseReleased(evt);
+            }
+        });
+
+        jLabel16.setText("        ");
+        jLabel16.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel16MouseDragged(evt);
+            }
+        });
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel16MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel16MouseReleased(evt);
+            }
+        });
+
+        jLabel17.setText("        ");
+        jLabel17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel17MouseDragged(evt);
+            }
+        });
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel17MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel17MouseReleased(evt);
+            }
+        });
+
+        jLabel18.setText("        ");
+        jLabel18.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel18MouseDragged(evt);
+            }
+        });
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel18MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel18MouseReleased(evt);
+            }
+        });
+
+        jLabel19.setText("        ");
+        jLabel19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel19MouseDragged(evt);
+            }
+        });
+        jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel19MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel19MouseReleased(evt);
+            }
+        });
+
+        jLabel20.setText("        ");
+        jLabel20.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel20MouseDragged(evt);
+            }
+        });
+        jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel20MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel20MouseReleased(evt);
+            }
+        });
+
+        jLabel1.setText("Turno de");
+
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("Puntuacion");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jLabel4.setText("Nueva Palabra");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Cambiar Letras");
+
+        checkbox1.setLabel("a");
+
+        checkbox5.setLabel("a");
+
+        checkbox6.setLabel("a");
+
+        checkbox2.setLabel("a");
+
+        checkbox3.setLabel("a");
+
+        checkbox7.setLabel("a");
+
+        checkbox4.setLabel("a");
+
+        jButton2.setText("cambiar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(37, 37, 37))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addContainerGap(76, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addContainerGap(58, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(checkbox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkbox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkbox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(checkbox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(checkbox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton2))
+                        .addGap(29, 29, 29)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkbox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkbox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkbox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkbox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkbox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jButton2)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -453,71 +554,60 @@ public class Juego extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(45, 45, 45)
                                 .addComponent(jButton3)
                                 .addGap(33, 33, 33)
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton15))
+                                .addComponent(jButton4))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel20)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(49, 49, 49)
-                        .addComponent(jButton12))
+                            .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(62, 62, 62))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(46, 46, 46))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton13)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(checkbox5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(checkbox6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(checkbox7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkbox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(checkbox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(29, 29, 29)))
-                    .addComponent(jButton14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton15)
+                                .addGap(28, 28, 28)
+                                .addComponent(jButton14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)))))
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -529,55 +619,21 @@ public class Juego extends javax.swing.JFrame {
                         .addComponent(jTabbedPane1)
                         .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(checkbox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(checkbox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton14)))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton14)
+                                    .addComponent(jButton15))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton12)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jButton13)
                                 .addGap(31, 31, 31))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
-                                .addGap(25, 25, 25))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton6)
@@ -586,17 +642,20 @@ public class Juego extends javax.swing.JFrame {
                                     .addComponent(jButton9)
                                     .addComponent(jButton10)
                                     .addComponent(jButton11)
-                                    .addComponent(jButton5))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jButton3)
-                                            .addComponent(jButton4)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jButton15))))))))
+                                    .addComponent(jButton5)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel20))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jButton3)
+                                    .addComponent(jButton4))
+                                .addGap(14, 14, 14))))))
         );
 
         pack();
@@ -613,8 +672,21 @@ public class Juego extends javax.swing.JFrame {
     public int [][] hola=new int[4][4];
     public JButton [][] holu;
     public int dimension=Integer.parseInt(LectorXML.dimensiones);
+    boolean select=false;
+    JButton butonselect;
+    String letraselect;
     
-    
+    public class MyButtonListener implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton source = (JButton) e.getSource();
+                int x=source.getX();
+                int y=source.getY();
+		//JOptionPane.showMessageDialog(source, source.getText() + " button has been pressed" +source.getX
+                cambiar(x,y);
+                //Juego cambiar(source.getX(),source.getY());
+	}
+}
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String palabra=jTextField1.getText();
@@ -623,22 +695,116 @@ public class Juego extends javax.swing.JFrame {
         diccionario.imprimir();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public boolean valido=true;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        actual=actual.getSiguiente();
-        jLabel2.setText(actual.getNombre());
         
-        ListaSimple lista=actual.getLetras();
-        actualizar(lista);
+        verificar();
+        if(valido==true)
+        {
+            ListaSimple hola=new ListaSimple();
+            for(int i=0; i<7; i++)
+            {
+                hola.insertar(letras.sacar());
+                if(letras.cantidad()<0)
+                 {
+                 terminar();
+                 }
+            }
+            actual.setLetras(hola);
+            
+            actual=actual.getSiguiente();
+            jLabel2.setText(actual.getNombre());
+            ListaSimple lista=actual.getLetras();
+            actualizar(lista);
+            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"MOVIMIENTO INVALIDO");
+            quitar();   
+        }
+            jButton5.setVisible(true);
+            jButton6.setVisible(true);
+            jButton7.setVisible(true);
+            jButton8.setVisible(true);
+            jButton9.setVisible(true);
+            jButton10.setVisible(true);
+            jButton11.setVisible(true);
+            valido=true;
+            cambiar=false; 
+        
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    public void verificar()
+    {
+        NodoMatriz auxiliar;
+        boolean horizontal=true;
+        boolean vertical=true;
+                
+          for(NodoSimple aqui=prueba.getCabeza();aqui.getSiguiente()!=null; aqui=aqui.getSiguiente())
+          {
+              if(!(aqui.getX().equals(aqui.getSiguiente().getX())))
+              {
+                  vertical=false;
+              }
+              if(!(aqui.getY().equals(aqui.getSiguiente().getY())))
+              {
+                  horizontal=false;
+              }
+          }
+          if (vertical==true)
+          {
+              int columna=0;
+              int menor=100;int mayor=-1;
+              for(NodoSimple aqui=prueba.getCabeza();aqui!=null; aqui=aqui.getSiguiente())
+              {
+                  int y=Integer.parseInt(aqui.getY());
+                  columna=Integer.parseInt(aqui.getX());
+                  if(y<menor)
+                  {
+                      menor=y;
+                  }
+                  if(y>mayor)
+                  {
+                      mayor=y;
+                  }
+              }
+              validarv(menor, mayor,columna);
+              
+          }
+          if(horizontal==true)
+          {
+              int fila=0;
+              int menor=100;int mayor=-1;
+              for(NodoSimple aqui=prueba.getCabeza();aqui!=null; aqui=aqui.getSiguiente())
+              {
+                  fila=Integer.parseInt(aqui.getY());
+                  int x=Integer.parseInt(aqui.getX());
+                  if(x<menor)
+                  {
+                      menor=x;
+                  }
+                  if(x>mayor)
+                  {
+                      mayor=x;
+                  }
+              }
+              validarh(menor, mayor,fila);
+          }
+          if(horizontal==false&&vertical==false)
+          {
+              valido=false;
+          }
+    }
+    
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         Graficas g=new Graficas();
         try {
             g.txt(actual.getLetras(),actual.getNombre());
-//            g.txt(jugadores);
-           //g.txt(letras);
+            g.txt(jugadores);
+            g.txt(letras);
+            g.txt(diccionario);
         } catch (IOException ex) {
             Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -717,10 +883,16 @@ public class Juego extends javax.swing.JFrame {
 //        {
 //            
 //        }
+        
         for(int i=0; i<contar; i++)
         {
             auxiliar.insertar(letras.sacar());
+            if(letras.cantidad()<0)
+             {
+                 terminar();
+             }
         }
+        
         checkbox1.setState(false);
         checkbox2.setState(false);
         checkbox3.setState(false);
@@ -766,62 +938,10 @@ public class Juego extends javax.swing.JFrame {
         jLabel12.setIcon(icono5);
         
     }
-    
-    private void jButton5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseDragged
-        // TODO add your handling code here:
-//        int x= evt.getX(); 
-//        int y = evt.getY();
-//        jLabel8.setText(x+" " + y);
-//        jLabel9.setText(jButton5.getX()+""+jButton5.getY());
-        
-    }//GEN-LAST:event_jButton5MouseDragged
-
-    private void jButton5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MouseMoved
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:
-        int x= evt.getX(); 
-        int y = evt.getY();
-        jLabel9.setText(jButton5.getX()+" "+jButton5.getY());
-        
-    }//GEN-LAST:event_formMouseClicked
-    int x1,x2;
-    private void jButton6MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseDragged
-        // TODO add your handling code here:
-        int x= evt.getX(); 
-        int y = evt.getY();
-        jButton5.setLocation(x+x1,y+x2);
-        //System.out.println("si");
-    }//GEN-LAST:event_jButton6MouseDragged
-    
-    private void jButton6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MousePressed
-        // TODO add your handling code here:
-        x1=jButton6.getX();
-        x2=jButton6.getY();
-        jLabel9.setText(jButton6.getX()+" "+jButton6.getY());
-//        jLabel9.setText(x1+" "+x2);
-    }//GEN-LAST:event_jButton6MousePressed
-
+        int x1,x2;    
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MousePressed
-        // TODO add your handling code here:
-        x1=jButton5.getX();
-        x2=jButton5.getY();
-        jLabel9.setText(x1+" "+x2);
-    }//GEN-LAST:event_jButton7MousePressed
-
-    private void jButton7MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseDragged
-        // TODO add your handling code here:
-         int x= evt.getX(); 
-        int y = evt.getY();
-        jButton6.setLocation(x+x1,y+x2);
-//        jLabel8.setText(x+" "+y);
-    }//GEN-LAST:event_jButton7MouseDragged
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
@@ -843,104 +963,397 @@ public class Juego extends javax.swing.JFrame {
 
     private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
         // TODO add your handling code here:
-        jLabel9.setText(jButton5.getX()+" "+jButton5.getY());
+        
         
     }//GEN-LAST:event_jButton5MousePressed
 
-    private void jButton8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MousePressed
-        // TODO add your handling code here:
-        x1=jButton8.getX();
-        x2=jButton8.getY();
-        jLabel9.setText(x1+" "+x2);
-    }//GEN-LAST:event_jButton8MousePressed
-
-    private void jButton8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8MouseDragged
-
-    private void jButton9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MousePressed
-        // TODO add your handling code here:
-        x1=jButton9.getX();
-        x2=jButton9.getY();
-        jLabel9.setText(x1+" "+x2);
-    }//GEN-LAST:event_jButton9MousePressed
-
-    private void jButton9MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9MouseDragged
-
-    private void jButton11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MousePressed
-        // TODO add your handling code here:
-        x1=jButton11.getX();
-        x2=jButton11.getY();
-        jLabel9.setText(x1+" "+x2);
-    }//GEN-LAST:event_jButton11MousePressed
-
-    private void jButton10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MousePressed
-        // TODO add your handling code here:
-        x1=jButton10.getX();
-        x2=jButton10.getY();
-        jLabel9.setText(x1+" "+x2);
-    }//GEN-LAST:event_jButton10MousePressed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        jButton5.setLocation(20,618);
-        jButton6.setLocation(89,618);
-        jButton7.setLocation(162,618);
-        jButton8.setLocation(227,618);
-        jButton9.setLocation(286,618);
-        jButton10.setLocation(354,618);
-        jButton11.setLocation(423,618);
+//        jButton5.setLocation(20,618);
+//        jButton6.setLocation(89,618);
+//        jButton7.setLocation(162,618);
+//        jButton8.setLocation(227,618);
+//        jButton9.setLocation(286,618);
+//        jButton10.setLocation(354,618);
+//        jButton11.setLocation(423,618);
+          jButton5.setVisible(true);
+          jButton6.setVisible(true);
+          jButton7.setVisible(true);
+          jButton8.setVisible(true);
+          jButton9.setVisible(true);
+          jButton10.setVisible(true);
+          jButton11.setVisible(true);
+          
+ 
+//          NodoMatriz auxiliar;
+//          for (int posY=0 ; posY<dimension; posY++)
+//          {
+//              auxiliar = m.buscar(0,posY);
+//                for (int posX=0 ; posX<dimension; posX++){
+//                    System.out.print("<-"+auxiliar.getPalabra()+"->");
+//                    auxiliar=auxiliar.getDerecha();
+//            }
+//                System.out.println("");
+//          }
+          
+          quitar();
+          cambiar=false;        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    public void quitar()
+    {
+        NodoMatriz auxiliar;
+          for(NodoSimple aqui=prueba.getCabeza();aqui!=null; aqui=aqui.getSiguiente())
+          {
+              auxiliar=m.buscar(Integer.parseInt(aqui.getX()), Integer.parseInt(aqui.getY()));
+              Icon actual2=aqui.getBoton().getIcon();
+              JButton pre=auxiliar.getBoton();
+              pre.setIcon(null);
+              auxiliar.setBoton(pre);
+              auxiliar.setPalabra("");
+          }
+    }
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-        letras.mostrar();
-        System.out.println(letras.cantidad());
-        for(int i=0; i<10; i++)
-        {
-            letras.sacar();
-        }
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
         Graficas g=new Graficas();
         try {
-           // g.txt(actual.getLetras());
-            g.txt(jugadores);
-            g.txt(letras);
-            g.txt(diccionario);
-            //g.txt(m,dimension);
+            g.txt(m,dimension);
         } catch (IOException ex) {
             Logger.getLogger(Juego.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_jButton14ActionPerformed
+    public void cambiar(int posx, int posy)
+    {
+        if(select=true)
+        {
+        int tamano=600/dimension;
+        int x=posx/tamano;
+        int y=posy/tamano;
+        NodoMatriz actual=m.buscar(x, y);
         
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
-
+        ImageIcon fot = new ImageIcon("C:\\imagenes\\graficos\\2.png");
+        Icon dobl = new ImageIcon(fot.getImage().getScaledInstance(600/dimension, 600/dimension, SCALE_DEFAULT));
+        
+            JButton nuevo=actual.getBoton();
+            nuevo.setIcon(dobl);
+            actual.setBoton(nuevo);
+            JOptionPane.showMessageDialog(null,""+butonselect.getText()); 
+        }
+        
+//        jPanel3.add(nuevo);
+//        nuevo.setVisible(true);       
+//        nuevo.setBounds(0,0,600/dimension,600/dimension);
+        
+        
+    }
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         // TODO add your handling code here:
          int x= evt.getX(); 
         int y = evt.getY();
-        jLabel8.setText(x+" "+y);
+        
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
-        ImageIcon fot = new ImageIcon("C:\\imagenes\\graficos\\2.png");
-        Icon dobl = new ImageIcon(fot.getImage().getScaledInstance(600/dimension, 600/dimension, SCALE_DEFAULT));
-        NodoMatriz actual=m.buscar(0,0);
-        JButton nuevo=actual.getBoton();
-        nuevo.setIcon(dobl);
-//        jPanel3.add(nuevo);
-//        nuevo.setVisible(true);       
-//        nuevo.setBounds(0,0,600/dimension,600/dimension);
-        actual.setBoton(nuevo);
-        
-        
+        terminar();
     }//GEN-LAST:event_jButton15ActionPerformed
+    public void terminar()
+    {
+        int puntos=-2;
+        String nombre="";
+        for (actual = jugadores.getCabeza().getSiguiente(); actual != jugadores.getCabeza(); actual = actual.getSiguiente()) {
+            if(actual.getPuntos()>puntos)
+            {
+                puntos=actual.getPuntos();
+                nombre=actual.getNombre();
+            }
+        }
+        if(actual.getPuntos()>puntos)
+        {
+            puntos=actual.getPuntos();
+            nombre=actual.getNombre();
+        }
+        JOptionPane.showMessageDialog(null, "EL GANADOR ES: "+nombre+" CON "+puntos+" PUNTOS");
+    }
+    public void validarv(int menor, int mayor,int columna)
+    {
+        int puntuacion=0;
+        String palabra="";
+        for(int i=menor; i<=mayor; i++)
+        {
+            puntuacion=puntuacion+puntos(m.buscar(columna, i).getPalabra());
+            palabra=palabra+m.buscar(columna, i).getPalabra();
+            if(m.buscar(columna, i).getPalabra().equalsIgnoreCase(""))
+            {
+                palabra=palabra+"!3231";
+            }
+        }
+        if(buscarpalabra(palabra))
+        {
+            actual.setPuntos(actual.getPuntos()+puntuacion);
+            String texto=jTextArea1.getText();
+            jTextArea1.setText(jTextArea1.getText()+actual.getNombre()+"="+actual.getPuntos());
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "ESA PALABRA NO EXISTE");
+            valido=false;
+        }
+    }
+    public void validarh(int menor, int mayor,int fila)
+    {
+        int puntuacion=0;
+        String palabra="";
+        for(int i=menor; i<=mayor; i++)
+        {
+            puntuacion=puntuacion+puntos(m.buscar(i,fila).getPalabra());
+            palabra=palabra+m.buscar(i,fila).getPalabra();
+            if(m.buscar(i,fila).getPalabra().equalsIgnoreCase(""))
+            {
+                palabra=palabra+"!3231";
+            }
+        }
+        if(buscarpalabra(palabra))
+        {
+            actual.setPuntos(actual.getPuntos()+puntuacion);
+            String texto=jTextArea1.getText();
+            jTextArea1.setText(jTextArea1.getText()+actual.getNombre()+"="+actual.getPuntos());
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "ESA PALABRA NO EXISTE");
+            valido=false;
+        }
+    }
+    public int puntos(String letra)
+    {
+        int cantidad=0;
+        if(letra.equalsIgnoreCase("a")|letra.equalsIgnoreCase("e")|letra.equalsIgnoreCase("o")|letra.equalsIgnoreCase("i")|letra.equalsIgnoreCase("s")|letra.equalsIgnoreCase("n")|letra.equalsIgnoreCase("l")|letra.equalsIgnoreCase("r")|letra.equalsIgnoreCase("u")|letra.equalsIgnoreCase("t"))
+        {
+            cantidad=1;
+        }
+        if(letra.equalsIgnoreCase("d")|letra.equalsIgnoreCase("g"))
+        {
+            cantidad=2;
+        }
+        if(letra.equalsIgnoreCase("c")|letra.equalsIgnoreCase("b")|letra.equalsIgnoreCase("m")|letra.equalsIgnoreCase("p"))
+        {
+            cantidad=3;
+        }
+        if(letra.equalsIgnoreCase("h")|letra.equalsIgnoreCase("f")|letra.equalsIgnoreCase("v")|letra.equalsIgnoreCase("y"))
+        {
+            cantidad=4;
+        }
+        if(letra.equalsIgnoreCase("q"))
+        {
+            cantidad=5;
+        }
+        if(letra.equalsIgnoreCase("j")|letra.equalsIgnoreCase("ñ")|letra.equalsIgnoreCase("x"))
+        {
+            cantidad=8;
+        }
+        if(letra.equalsIgnoreCase("z"))
+        {
+            cantidad=10;
+        }
+        return cantidad;
+    }
+    public boolean buscarpalabra(String palabra)
+    {
+        for(NodoSimple aqui=diccionario.getCabeza();aqui!=null; aqui=aqui.getSiguiente())
+        {
+            if(aqui.getPalabra().equalsIgnoreCase(palabra))
+            {
+                return true;
+            }
+        }
+        return false;   
+    }
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jLabel14MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MousePressed
+        // TODO add your handling code here:
+        x1=jLabel14.getX();
+        x2=jLabel14.getY();
+        butonselect=jButton5;
+    }//GEN-LAST:event_jLabel14MousePressed
+
+    private void jLabel14MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseDragged
+        // TODO add your handling code here:
+        int x= evt.getX(); 
+        int y = evt.getY();
+        jButton5.setLocation(x+x1,y+x2);
+    }//GEN-LAST:event_jLabel14MouseDragged
+
+    private void jLabel14MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseReleased
+        // TODO add your handling code here:
+        int x=jButton5.getX();
+        int y=jButton5.getY();
+        cambiarficha(x,y);
+        
+    }//GEN-LAST:event_jLabel14MouseReleased
+
+    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
+        // TODO add your handling code here:
+        x1=jLabel15.getX();
+        x2=jLabel15.getY();
+        butonselect=jButton6;
+    }//GEN-LAST:event_jLabel15MousePressed
+
+    private void jLabel15MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseDragged
+        // TODO add your handling code here:
+        int x= evt.getX(); 
+        int y = evt.getY();
+        jButton6.setLocation(x+x1,y+x2);
+    }//GEN-LAST:event_jLabel15MouseDragged
+
+    private void jLabel15MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseReleased
+        // TODO add your handling code here:
+        int x=jButton6.getX();
+        int y=jButton6.getY();
+        cambiarficha(x,y);
+    }//GEN-LAST:event_jLabel15MouseReleased
+
+    private void jLabel16MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MousePressed
+        // TODO add your handling code here:
+        x1=jLabel16.getX();
+        x2=jLabel16.getY();
+        butonselect=jButton7;
+    }//GEN-LAST:event_jLabel16MousePressed
+
+    private void jLabel16MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseDragged
+        // TODO add your handling code here:
+        int x= evt.getX(); 
+        int y = evt.getY();
+        jButton7.setLocation(x+x1,y+x2);
+    }//GEN-LAST:event_jLabel16MouseDragged
+
+    private void jLabel16MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseReleased
+        // TODO add your handling code here:
+        int x=jButton7.getX();
+        int y=jButton7.getY();
+        cambiarficha(x,y);
+    }//GEN-LAST:event_jLabel16MouseReleased
+
+    private void jLabel17MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MousePressed
+        // TODO add your handling code here:
+        x1=jLabel17.getX();
+        x2=jLabel17.getY();
+        butonselect=jButton8;
+    }//GEN-LAST:event_jLabel17MousePressed
+
+    private void jLabel17MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseDragged
+        // TODO add your handling code here:
+        int x= evt.getX(); 
+        int y = evt.getY();
+        jButton8.setLocation(x+x1,y+x2);
+    }//GEN-LAST:event_jLabel17MouseDragged
+
+    private void jLabel17MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseReleased
+        // TODO add your handling code here:
+        int x=jButton8.getX();
+        int y=jButton8.getY();
+        cambiarficha(x,y);
+    }//GEN-LAST:event_jLabel17MouseReleased
+
+    private void jLabel18MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MousePressed
+        // TODO add your handling code here:
+         x1=jLabel18.getX();
+        x2=jLabel18.getY();
+        butonselect=jButton9;
+    }//GEN-LAST:event_jLabel18MousePressed
+
+    private void jLabel18MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseDragged
+        // TODO add your handling code here:
+         int x= evt.getX(); 
+        int y = evt.getY();
+        jButton9.setLocation(x+x1,y+x2);
+    }//GEN-LAST:event_jLabel18MouseDragged
+
+    private void jLabel18MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseReleased
+        // TODO add your handling code here:
+         int x=jButton9.getX();
+        int y=jButton9.getY();
+        cambiarficha(x,y);
+    }//GEN-LAST:event_jLabel18MouseReleased
+
+    private void jLabel19MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MousePressed
+        // TODO add your handling code here:
+       x1=jLabel19.getX();
+        x2=jLabel19.getY();
+        butonselect=jButton10;
+    }//GEN-LAST:event_jLabel19MousePressed
+
+    private void jLabel19MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseDragged
+        // TODO add your handling code here:
+        int x= evt.getX(); 
+        int y = evt.getY();
+        jButton10.setLocation(x+x1,y+x2);
+    }//GEN-LAST:event_jLabel19MouseDragged
+
+    private void jLabel19MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseReleased
+        // TODO add your handling code here:
+        int x=jButton10.getX();
+        int y=jButton10.getY();
+        cambiarficha(x,y);
+    }//GEN-LAST:event_jLabel19MouseReleased
+
+    private void jLabel20MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MousePressed
+        // TODO add your handling code here:
+        x1=jLabel20.getX();
+        x2=jLabel20.getY();
+        butonselect=jButton11;
+        butonselect=jButton11;
+    }//GEN-LAST:event_jLabel20MousePressed
+
+    private void jLabel20MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseDragged
+        // TODO add your handling code here:
+        int x= evt.getX(); 
+        int y = evt.getY();
+        jButton11.setLocation(x+x1,y+x2);
+    }//GEN-LAST:event_jLabel20MouseDragged
+
+    private void jLabel20MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseReleased
+        // TODO add your handling code here:
+        int x=jButton11.getX();
+        int y=jButton11.getY();
+        cambiarficha(x,y);
+    }//GEN-LAST:event_jLabel20MouseReleased
+//    public MatrizOrtogonal n=new MatrizOrtogonal(dimension);
+    public boolean cambiar;
+    public ListaSimple prueba=new ListaSimple();
+    public void cambiarficha(int posx, int posy)
+    {
+        if(cambiar==false)
+        {
+            prueba=new ListaSimple();
+            cambiar=true;
+        }
+        posx=posx-51;
+        posy=posy-12;
+        int tamano=600/dimension;
+        int x=posx/tamano;
+        int y=posy/tamano;
+        NodoMatriz actual=m.buscar(x, y);
+        JButton nuevo=actual.getBoton();
+        prueba.insertar(String.valueOf(x),String.valueOf(y),actual.getBoton(),actual.getPalabra());
+        nuevo.setIcon(imagenletra(butonselect.getText()));
+        actual.setBoton(nuevo);
+        actual.setPalabra(butonselect.getText());
+        butonselect.setVisible(false);
+        
+    }
+    public Icon imagenletra(String letra)
+    {
+        letra=letra.toLowerCase();
+        ImageIcon fot = new ImageIcon("C:\\imagenes\\graficos\\letras\\"+letra+".png");
+        Icon a = new ImageIcon(fot.getImage().getScaledInstance(600/dimension, 600/dimension, SCALE_DEFAULT));
+        return a;
+    }
     /**
      * @param args the command line arguments
      */
@@ -975,7 +1388,7 @@ public class Juego extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Checkbox checkbox1;
     private java.awt.Checkbox checkbox2;
@@ -1004,14 +1417,20 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
